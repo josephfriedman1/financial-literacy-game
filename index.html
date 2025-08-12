@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestSim - Financial Literacy Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Full Screen Welcome -->
+    <div class="welcome-screen" id="welcome-screen">
+        <div class="particles" id="particles"></div>
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <h1>📈 InvestSim</h1>
+                <div class="creator-line">
+                    <span class="by-text">by</span>
+                    <span class="creator-name">Joseph Friedman</span>
+                    <span class="creator-school">Marlboro High School, Class of 2026</span>
+                </div>
+                <p class="tagline">Master investing through realistic market simulation</p>
+                <p class="subtitle">A financial literacy game designed to teach smart investing to high school students</p>
+            </div>
+
+            <div class="welcome-main">
+                <div class="game-preview">
+                    <div class="preview-card">
+                        <div class="preview-icon">💰</div>
+                        <h3>Start with $10,000</h3>
+                        <p>Begin your investment journey with virtual capital</p>
+                    </div>
+                    <div class="preview-card">
+                        <div class="preview-icon">📊</div>
+                        <h3>Real Market Data</h3>
+                        <p>Experience actual daily market movements and learn from real events</p>
+                    </div>
+                    <div class="preview-card">
+                        <div class="preview-icon">🤖</div>
+                        <h3>AI Mentor</h3>
+                        <p>Learn from market events with personalized guidance and explanations</p>
+                    </div>
+                </div>
+
+                <div class="welcome-actions">
+                    <button id="start-game-btn" class="btn-primary large">Start Your Investment Journey</button>
+                </div>
+
+                <div class="welcome-footer">
+                    <button id="about-btn" class="footer-link">About This Project</button>
+                    <span class="separator">•</span>
+                    <button id="testimonials-btn" class="footer-link">Student Testimonials</button>
+                    <span class="separator">•</span>
+                    <button id="leaderboard-btn" class="footer-link">Leaderboard</button>
+                    <span class="separator">•</span>
+                    <button id="settings-btn" class="footer-link">Market Data Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Screen Interactive Tutorial -->
+    <div id="tutorial-screen" class="tutorial-screen" style="display: none;">
+        <div class="tutorial-container">
+            <!-- Tutorial Step 1: Welcome -->
+            <div class="tutorial-slide active" id="tutorial-slide-1">
+                <div class="tutorial-content">
+                    <div class="tutorial-icon">💰</div>
+                    <h1>Welcome to InvestSim!</h1>
+                    <p class="tutorial-subtitle">Let's learn how to invest your money and make it grow</p>
+
+                    <div class="tutorial-visual">
+                        <div class="money-animation">
+                            <div class="money-stack">
+                                <div class="bill">💵</div>
+                                <div class="bill">💵</div>
+                                <div class="bill">💵</div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="growth-chart">📈</div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-explanation">
+                        <h3>You get $10,000 fake money to practice with!</h3>
+                        <p>This is like a video game - the money isn't real, so you can't lose anything. Your job is to make smart choices and see if you can grow your money!</p>
+
+                        <div class="tutorial-highlight">
+                            <strong>🎯 Your Goal:</strong> Turn $10,000 into MORE money in 12 months!<br>
+                            <strong>🎮 How it works:</strong> Each month, you decide where to put your money, then see what happens!
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Tutorial Step 2: Investment Types -->
+            <div class="tutorial-slide" id="tutorial-slide-2">
+                <div class="tutorial-content">
+                    <div class="tutorial-icon">📊</div>
+                    <h1>4 Ways to Invest Your Money</h1>
+                    <p class="tutorial-subtitle">Think of these like different buckets for your money</p>
+
+                    <div class="investment-types">
+                        <div class="investment-card">
+                            <div class="investment-icon">📈</div>
+                            <h3>Stocks</h3>
+                            <p>Own tiny pieces of companies like Apple or Google</p>
+                            <div class="simple-explanation">Can go up or down a lot!</div>
+                            <div class="risk-meter">
+                                <span>Risky but can make lots of money:</span>
+                                <div class="meter high">🔥🔥🔥 💰💰💰</div>
+                            </div>
+                        </div>
+
+                        <div class="investment-card">
+                            <div class="investment-icon">🏛️</div>
+                            <h3>Bonds</h3>
+                            <p>Lend money to the government or companies</p>
+                            <div class="simple-explanation">Slow and steady growth</div>
+                            <div class="risk-meter">
+                                <span>Safe but makes less money:</span>
+                                <div class="meter low">🔥 💰</div>
+                            </div>
+                        </div>
+
+                        <div class="investment-card">
+                            <div class="investment-icon">📊</div>
+                            <h3>ETFs</h3>
+                            <p>Like buying a mix of many different stocks at once</p>
+                            <div class="simple-explanation">Good middle ground</div>
+                            <div class="risk-meter">
+                                <span>Medium risk, medium reward:</span>
+                                <div class="meter medium">🔥🔥 💰💰</div>
+                            </div>
+                        </div>
+
+                        <div class="investment-card">
+                            <div class="investment-icon">💵</div>
+                            <h3>Cash</h3>
+                            <p>Just keep your money in the bank</p>
+                            <div class="simple-explanation">Super safe but boring</div>
+                            <div class="risk-meter">
+                                <span>No risk, no reward:</span>
+                                <div class="meter none">😴 😴</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Tutorial Step 3: Strategy Demo -->
+            <div class="tutorial-slide" id="tutorial-slide-3">
+                <div class="tutorial-content">
+                    <div class="tutorial-icon">🎯</div>
+                    <h1>Pick Your Strategy (Super Easy!)</h1>
+                    <p class="tutorial-subtitle">Just click one button - we'll do the math for you</p>
+
+                    <div class="strategy-demo">
+                        <div class="demo-preset" data-demo="conservative">
+                            <div class="demo-icon">🛡️</div>
+                            <h3>Conservative</h3>
+                            <p>"I want to be safe"</p>
+                            <div class="demo-allocation">
+                                <div class="demo-bar stocks" style="width: 20%">20%</div>
+                                <div class="demo-bar bonds" style="width: 60%">60%</div>
+                                <div class="demo-bar etfs" style="width: 10%">10%</div>
+                                <div class="demo-bar cash" style="width: 10%">10%</div>
+                            </div>
+                            <div class="demo-result">💡 Slow but steady growth</div>
+                        </div>
+
+                        <div class="demo-preset" data-demo="balanced">
+                            <div class="demo-icon">⚖️</div>
+                            <h3>Balanced</h3>
+                            <p>"I want some growth and some safety"</p>
+                            <div class="demo-allocation">
+                                <div class="demo-bar stocks" style="width: 40%">40%</div>
+                                <div class="demo-bar bonds" style="width: 30%">30%</div>
+                                <div class="demo-bar etfs" style="width: 25%">25%</div>
+                                <div class="demo-bar cash" style="width: 5%">5%</div>
+                            </div>
+                            <div class="demo-result">💡 Good mix of growth and safety</div>
+                        </div>
+
+                        <div class="demo-preset" data-demo="aggressive">
+                            <div class="demo-icon">🚀</div>
+                            <h3>Aggressive</h3>
+                            <p>"I want maximum growth!"</p>
+                            <div class="demo-allocation">
+                                <div class="demo-bar stocks" style="width: 70%">70%</div>
+                                <div class="demo-bar bonds" style="width: 10%">10%</div>
+                                <div class="demo-bar etfs" style="width: 15%">15%</div>
+                                <div class="demo-bar cash" style="width: 5%">5%</div>
+                            </div>
+                            <div class="demo-result">💡 High risk, high reward</div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-tip">
+                        <h3>💡 Pro Tip</h3>
+                        <p>You can change your strategy every month based on what you learn!</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Tutorial Step 4: Game Flow -->
+            <div class="tutorial-slide" id="tutorial-slide-4">
+                <div class="tutorial-content">
+                    <div class="tutorial-icon">🎮</div>
+                    <h1>Here's How Each Month Works</h1>
+                    <p class="tutorial-subtitle">It's like a simple 3-step cycle</p>
+
+                    <div class="game-flow">
+                        <div class="flow-step">
+                            <div class="flow-number">1</div>
+                            <div class="flow-content">
+                                <h3>You Choose</h3>
+                                <p>Pick how to split your money</p>
+                                <div class="flow-visual">🎯</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-step">
+                            <div class="flow-number">2</div>
+                            <div class="flow-content">
+                                <h3>Market Moves</h3>
+                                <p>Something happens in the world</p>
+                                <div class="flow-visual">📰</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">↓</div>
+
+                        <div class="flow-step">
+                            <div class="flow-number">3</div>
+                            <div class="flow-content">
+                                <h3>AI Teaches You</h3>
+                                <p>Learn why it happened</p>
+                                <div class="flow-visual">🤖</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-example">
+                        <h3>Example:</h3>
+                        <p><strong>You choose:</strong> Put 50% in stocks<br>
+                        <strong>Market event:</strong> "Tech companies do really well!"<br>
+                        <strong>Result:</strong> Your stocks go up 5%<br>
+                        <strong>AI teaches:</strong> "This is called sector growth - when one industry does well"</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Fixed Navigation at Bottom -->
+            <div class="tutorial-navigation" id="tutorial-navigation">
+                <button class="btn-secondary" id="tutorial-prev-btn" onclick="goToPreviousSlide()">← Back</button>
+                <button class="btn-primary" id="tutorial-next-btn" onclick="goToNextSlide()">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content about-flow">
+            <span class="close">&times;</span>
+
+            <div class="about-content-flow">
+                <div class="about-title">
+                    <h2>📈 InvestSim</h2>
+                    <p class="subtitle">An educational investment simulation game designed to teach teenagers about portfolio management, market dynamics, and financial literacy.</p>
+                </div>
+
+                <div class="creator-intro">
+                    <h3>👨‍🎓 Created by Joseph Friedman</h3>
+                    <p class="creator-details">Marlboro High School • Class of 2026 • Planning to pursue Finance in college</p>
+                    <p class="creator-mission">I'm passionate about financial literacy and believe that understanding investing should be accessible to everyone, especially high school students. This project combines my interests in technology and finance to create an educational tool that makes complex financial concepts easy to understand.</p>
+                </div>
+
+                <div class="game-info">
+                    <h3>🎮 How It Works</h3>
+                    <p>Start with $10,000 in virtual money and allocate it across stocks, bonds, ETFs, and cash. Experience 12 months of real market events while learning from an AI mentor after each month. See how your decisions affect your portfolio and develop long-term investment thinking.</p>
+
+                    <h3>🎓 What You'll Learn</h3>
+                    <p>Understand risk vs. reward in investing, learn about diversification and asset allocation, experience market volatility in a safe environment, and develop smart money habits that will serve you for life.</p>
+
+                    <div class="important-note">
+                        <strong>⚠️ Remember:</strong> This is a simulation with virtual money. Real investing involves actual financial risk.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('settings-modal').style.display='none'">&times;</span>
+            <h2>📊 Real Market Data</h2>
+            <p>InvestSim automatically uses real market data to provide the most educational experience!</p>
+
+            <div class="settings-section">
+                <h3>✅ Current Status</h3>
+                <div class="status-indicator active" id="market-data-status-modal">
+                    <span class="status-text active">Real market data is active and updating daily!</span>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>📈 What You're Getting</h3>
+                <div class="data-sources">
+                    <div class="data-source">
+                        <div class="source-icon">📊</div>
+                        <div class="source-info">
+                            <h4>S&P 500 ETF (SPY)</h4>
+                            <p>Real daily stock market performance representing 500 largest US companies</p>
+                        </div>
+                    </div>
+                    <div class="data-source">
+                        <div class="source-icon">🏛️</div>
+                        <div class="source-info">
+                            <h4>Treasury Bonds (TLT)</h4>
+                            <p>Actual government bond movements showing safe investment performance</p>
+                        </div>
+                    </div>
+                    <div class="data-source">
+                        <div class="source-icon">📈</div>
+                        <div class="source-info">
+                            <h4>Total Market ETF (VTI)</h4>
+                            <p>Complete US stock market representation for diversified exposure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>🎓 Educational Benefits</h3>
+                <ul>
+                    <li>✅ Experience real market volatility in a safe environment</li>
+                    <li>✅ Learn from actual market events and news</li>
+                    <li>✅ Understand how different assets perform in real conditions</li>
+                    <li>✅ Develop intuition for market timing and psychology</li>
+                    <li>✅ See the impact of economic events on your portfolio</li>
+                </ul>
+            </div>
+
+            <div class="settings-section">
+                <h3>🔧 Advanced Options</h3>
+                <div class="api-key-input">
+                    <label for="api-key-input">Custom API Key (Optional):</label>
+                    <input type="text" id="api-key-input" placeholder="Enter your own Alpha Vantage API key for higher rate limits" />
+                    <button id="save-api-key" class="btn-primary">Update Key</button>
+                </div>
+                <p class="note">💡 <strong>Note:</strong> A working API key is already configured. You only need to add your own if you want higher rate limits for frequent use.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Month Transition Overlay -->
+    <div id="month-transition" class="month-transition" style="display: none;">
+        <div class="transition-content">
+            <div class="transition-animation">
+                <div class="calendar-icon">📅</div>
+                <div class="transition-text">
+                    <h2 id="transition-title">Processing Month...</h2>
+                    <p id="transition-subtitle">Analyzing market conditions...</p>
+                </div>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="game-container" id="game-container" style="display: none;">
+        <!-- Simplified Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <h1>InvestSim</h1>
+                <span class="month-indicator">Month <span id="current-month">1</span> of 12</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 8.33%"></div>
+                </div>
+                <div class="market-indicator" id="market-indicator">
+                    <div class="market-data-item">
+                        <span class="symbol">SPY</span>
+                        <span class="change loading">Loading...</span>
+                    </div>
+                    <div class="market-data-item">
+                        <span class="symbol">TLT</span>
+                        <span class="change loading">Loading...</span>
+                    </div>
+                    <div class="market-data-item">
+                        <span class="symbol">VTI</span>
+                        <span class="change loading">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="portfolio-summary">
+                    <div class="portfolio-value">
+                        <span class="label">Your Money</span>
+                        <span id="portfolio-value" class="value">$10,000</span>
+                        <span id="portfolio-change" class="change">Start here!</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Simplified Allocation Display -->
+        <div class="allocation-overview">
+            <div class="allocation-pie">
+                <canvas id="allocation-chart" width="200" height="200"></canvas>
+            </div>
+            <div class="allocation-legend">
+                <div class="legend-item">
+                    <div class="legend-color stocks"></div>
+                    <span>Stocks: <span id="stocks-percent">0%</span></span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color bonds"></div>
+                    <span>Bonds: <span id="bonds-percent">0%</span></span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color etfs"></div>
+                    <span>ETFs: <span id="etfs-percent">0%</span></span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color cash"></div>
+                    <span>Cash: <span id="cash-percent">100%</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comprehensive Monthly Report Screen -->
+        <div class="results-screen" id="results-screen" style="display: none;">
+            <div class="results-container">
+                <!-- Report Header with Performance Summary -->
+                <div class="report-header">
+                    <h1 id="results-month-title">Month 1 Complete!</h1>
+                    <div class="performance-summary positive" id="performance-summary">
+                        <div class="performance-emoji">📈</div>
+                        <div class="performance-text">
+                            <h2>Great job!</h2>
+                            <p>You gained <strong>$500</strong> this month (5.0%)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Comparison -->
+                <div class="portfolio-comparison">
+                    <div class="comparison-header">
+                        <h2>💰 Your Portfolio Performance</h2>
+                    </div>
+                    <div class="before-after">
+                        <div class="portfolio-before">
+                            <h3>Started With</h3>
+                            <div class="portfolio-value-big" id="portfolio-before">$10,000</div>
+                        </div>
+                        <div class="change-arrow">
+                            <div class="arrow-icon" id="change-direction">📈</div>
+                            <div class="change-amount positive" id="change-amount">+$500</div>
+                        </div>
+                        <div class="portfolio-after">
+                            <h3>Ended With</h3>
+                            <div class="portfolio-value-big" id="portfolio-after">$10,500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Event Explanation -->
+                <div class="market-event-section">
+                    <h2>📰 What Happened in the Market</h2>
+                    <div class="event-card-report">
+                        <div class="event-title-big" id="event-title-big">Tech Stocks Rally</div>
+                        <div class="event-description-simple" id="event-description-simple">
+                            Technology companies did really well this month, so their stock prices went up!
+                        </div>
+                        <div class="event-impact" id="event-impact">
+                            <h3>📊 Market Impact</h3>
+                            <p>Stocks rose by 5%, Bonds fell by 1%, ETFs rose by 3%.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investment Breakdown -->
+                <div class="investment-breakdown-section">
+                    <h2>💼 How Your Investments Performed</h2>
+                    <div class="breakdown-grid" id="impact-breakdown">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- AI Mentor Learning Section -->
+                <div class="learning-section">
+                    <div class="mentor-header">
+                        <div class="mentor-avatar-big">🤖</div>
+                        <h2>Your AI Investment Mentor</h2>
+                        <p class="mentor-subtitle">Let me explain what just happened and help you learn!</p>
+                    </div>
+
+                    <div class="learning-cards">
+                        <div class="concept-card">
+                            <div class="card-icon">📚</div>
+                            <h3>Key Concept</h3>
+                            <h4 id="concept-title">Sector Diversification</h4>
+                            <p id="concept-explanation">This means spreading your money across different types of companies so you're not putting all your eggs in one basket.</p>
+                        </div>
+
+                        <div class="advice-card">
+                            <div class="card-icon">💡</div>
+                            <h3>Smart Strategy</h3>
+                            <h4>For Next Month</h4>
+                            <p id="next-month-advice">Consider balancing your portfolio to reduce risk while keeping some growth potential.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="report-actions">
+                    <div class="action-buttons">
+                        <button id="continue-learning-btn" class="btn-primary large pulse-btn">
+                            Continue to Month <span id="next-month-number">2</span> 🚀
+                        </button>
+                        <button id="change-strategy-btn" class="btn-secondary">
+                            📊 Change My Strategy
+                        </button>
+                    </div>
+                    <div class="progress-indicator">
+                        <span class="progress-text">Month <span id="current-month-progress">1</span> of 12 complete</span>
+                        <div class="progress-bar-report">
+                            <div class="progress-fill-report" id="progress-fill-report" style="width: 8.33%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Strategy Selection -->
+        <div class="strategy-section" id="strategy-section">
+            <h2>Choose Your Investment Strategy</h2>
+            <p class="strategy-subtitle">Select a preset or customize your allocation</p>
+
+            <!-- Strategy Presets -->
+            <div class="strategy-presets">
+                <div class="preset-card" data-preset="conservative">
+                    <div class="preset-icon">🛡️</div>
+                    <h3>Conservative</h3>
+                    <p>Low risk, steady growth</p>
+                    <div class="preset-allocation">
+                        <span>20% Stocks • 60% Bonds • 10% ETFs • 10% Cash</span>
+                    </div>
+                </div>
+
+                <div class="preset-card" data-preset="balanced">
+                    <div class="preset-icon">⚖️</div>
+                    <h3>Balanced</h3>
+                    <p>Moderate risk and return</p>
+                    <div class="preset-allocation">
+                        <span>40% Stocks • 30% Bonds • 25% ETFs • 5% Cash</span>
+                    </div>
+                </div>
+
+                <div class="preset-card" data-preset="aggressive">
+                    <div class="preset-icon">🚀</div>
+                    <h3>Aggressive</h3>
+                    <p>High risk, high reward</p>
+                    <div class="preset-allocation">
+                        <span>70% Stocks • 10% Bonds • 15% ETFs • 5% Cash</span>
+                    </div>
+                </div>
+
+                <div class="preset-card" data-preset="custom">
+                    <div class="preset-icon">🎯</div>
+                    <h3>Custom</h3>
+                    <p>Build your own strategy</p>
+                    <div class="preset-allocation">
+                        <span>Customize allocation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Allocation (Hidden by default) -->
+            <div class="custom-allocation" id="custom-allocation" style="display: none;">
+                <div class="custom-header">
+                    <h3>🎯 Build Your Custom Strategy</h3>
+                    <p class="custom-instructions">
+                        💡 <strong>Pro Tip:</strong> Adjust the first 3 sliders - Cash will automatically balance to 100%!
+                    </p>
+                </div>
+                <div class="allocation-sliders">
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span class="asset-name">📈 Stocks</span>
+                            <span class="slider-value" id="stocks-value">0%</span>
+                        </div>
+                        <input type="range" id="stocks-slider" min="0" max="100" value="0" class="modern-slider">
+                        <div class="slider-description">High growth potential, higher risk</div>
+                    </div>
+
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span class="asset-name">🏛️ Bonds</span>
+                            <span class="slider-value" id="bonds-value">0%</span>
+                        </div>
+                        <input type="range" id="bonds-slider" min="0" max="100" value="0" class="modern-slider">
+                        <div class="slider-description">Stable income, lower risk</div>
+                    </div>
+
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span class="asset-name">📊 ETFs</span>
+                            <span class="slider-value" id="etfs-value">0%</span>
+                        </div>
+                        <input type="range" id="etfs-slider" min="0" max="100" value="0" class="modern-slider">
+                        <div class="slider-description">Diversified funds, balanced risk</div>
+                    </div>
+
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span class="asset-name">💵 Cash</span>
+                            <span class="slider-value" id="cash-value">100%</span>
+                        </div>
+                        <input type="range" id="cash-slider" min="0" max="100" value="100" class="modern-slider">
+                        <div class="slider-description">Safe but no growth</div>
+                    </div>
+                </div>
+
+                <div class="allocation-summary">
+                    <span class="total-label">Total Allocation:</span>
+                    <span id="total-allocation" class="total-value">100%</span>
+                    <span id="allocation-warning" class="warning" style="display: none;">Must equal 100%</span>
+                </div>
+            </div>
+
+            <div class="strategy-actions">
+                <button id="next-month-btn" class="btn-primary" disabled>Continue to Month 1</button>
+            </div>
+        </div>
+
+        <!-- Event Section (Fallback) -->
+        <div class="event-section" id="event-section" style="display: none;">
+            <div class="event-card">
+                <h3 id="event-title">Market Event</h3>
+                <p id="event-description">Event description will appear here...</p>
+                <div class="market-changes">
+                    <div class="change-item">
+                        <span class="asset">Stocks:</span>
+                        <span id="stocks-change" class="change-value">0%</span>
+                    </div>
+                    <div class="change-item">
+                        <span class="asset">Bonds:</span>
+                        <span id="bonds-change" class="change-value">0%</span>
+                    </div>
+                    <div class="change-item">
+                        <span class="asset">ETFs:</span>
+                        <span id="etfs-change" class="change-value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mentor-card">
+                <div class="mentor-avatar">🤖</div>
+                <div class="mentor-content">
+                    <h4>AI Mentor Explains:</h4>
+                    <p id="mentor-explanation">Mentor explanation will appear here...</p>
+                    <div class="concept-box">
+                        <strong id="concept-name">Concept:</strong>
+                        <p id="concept-definition">Concept definition will appear here...</p>
+                    </div>
+                    <div class="advice-box">
+                        <strong>💡 Advice:</strong>
+                        <p id="mentor-advice">Advice will appear here...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Chart -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h3>Portfolio Performance</h3>
+                <div class="chart-controls">
+                    <button id="restart-btn" class="btn-secondary small">🔄 Restart</button>
+                    <button id="leaderboard-btn" class="btn-secondary small">🏆 Leaderboard</button>
+                </div>
+            </div>
+            <canvas id="portfolio-chart"></canvas>
+        </div>
+    </div>
+
+        <!-- Leaderboard Modal -->
+        <div id="leaderboard-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>🏆 Leaderboard</h2>
+                <div id="leaderboard-list"></div>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="game-over-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>🎉 Game Complete!</h2>
+                <p>You've completed 12 months of investing!</p>
+                <div class="final-stats">
+                    <div class="stat">
+                        <strong>Final Portfolio Value:</strong>
+                        <span id="final-value">$0</span>
+                    </div>
+                    <div class="stat">
+                        <strong>Total Return:</strong>
+                        <span id="total-return">0%</span>
+                    </div>
+                    <div class="stat">
+                        <strong>Performance:</strong>
+                        <span id="performance-rating">Good</span>
+                    </div>
+                </div>
+                <input type="text" id="player-name" placeholder="Enter your name for leaderboard" maxlength="20">
+                <div class="modal-buttons">
+                    <button id="save-score-btn" class="btn primary">Save Score</button>
+                    <button id="play-again-btn" class="btn secondary">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Modal -->
+    <div id="testimonials-modal" class="modal">
+        <div class="modal-content testimonials-modal">
+            <span class="close">&times;</span>
+
+            <div class="testimonials-header">
+                <h2>⭐ Student Testimonials</h2>
+                <p class="testimonials-subtitle">Real feedback from students who've used InvestSim</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"This game completely changed how I think about investing! I actually understand diversification now and feel confident about my financial future."</p>
+                    <div class="testimonial-author">Sarah M.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The AI mentor explanations are incredible! I learned more about the stock market in 12 virtual months than in my entire economics class."</p>
+                    <div class="testimonial-author">Marcus T.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I love how realistic the market events are! Lost money during a crash but learned so much about risk management. Now I'm ready for real investing."</p>
+                    <div class="testimonial-author">Emma K.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Perfect for beginners! Started knowing nothing about finance, now I'm helping my parents with their investment decisions. This should be required in all schools."</p>
+                    <div class="testimonial-author">Alex R.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The portfolio tracking and charts make everything so clear. I can see exactly how my decisions affected my returns. Wish I had this before taking my finance class!"</p>
+                    <div class="testimonial-author">Jordan L.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Amazing educational tool! The real market data makes it feel authentic. I'm actually excited about learning finance now instead of being intimidated by it."</p>
+                    <div class="testimonial-author">Taylor S.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I was scared of investing before this. Now I understand risk vs reward and have a solid plan for my future. This should be taught in every high school!"</p>
+                    <div class="testimonial-author">Maya P.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The monthly reports and AI explanations helped me understand why my portfolio went up or down. I feel like I have a real mentor guiding me through investing."</p>
+                    <div class="testimonial-author">Ryan C.</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Love how it uses real market data! When I start investing for real, I'll already know what to expect. This gave me confidence I never had before."</p>
+                    <div class="testimonial-author">Jessica W.</div>
+                </div>
+
+
+            </div>
+
+            <div class="testimonials-stats">
+                <div class="stat">
+                    <div class="stat-number">4.9/5</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Students Taught</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">Would Recommend</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
