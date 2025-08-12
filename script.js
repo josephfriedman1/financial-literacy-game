@@ -243,6 +243,19 @@ const MARKET_EVENTS = [
 ];
 
 // Financial Literacy Simulation Game
+ensureModalsHiddenOnLoad() {
+    const modalIds = [
+        'about-modal',
+        'settings-modal',
+        'leaderboard-modal',
+        'game-over-modal',
+        'testimonials-modal'
+    ];
+    modalIds.forEach(id => {
+        const modal = document.getElementById(id);
+        if (modal) modal.style.display = 'none';
+    });
+}
 class FinancialGame {
     constructor() {
         this.gameState = {
@@ -287,6 +300,8 @@ class FinancialGame {
         this.initAllocationChart();
         this.createParticles();
         this.fetchMarketData(); // Load real market data
+        this.ensureModalsHiddenOnLoad(); 
+
     }
 
     loadApiKey() {
