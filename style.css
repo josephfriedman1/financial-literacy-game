@@ -1945,6 +1945,22 @@ body {
     overflow: visible;
 }
 
+/* Defensive: keep testimonials hidden by default until explicitly opened */
+#testimonials-modal,
+.testimonials-modal {
+    display: none !important;
+}
+
+/* When the outer modal has the 'open' class we show it (this allows JS to toggle visibility without fighting styles) */
+#testimonials-modal.open {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+#testimonials-modal.open .testimonials-modal {
+    display: block !important;
+}
+
 .testimonials-header {
     text-align: center;
     padding: 2rem;

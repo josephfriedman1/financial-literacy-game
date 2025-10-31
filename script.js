@@ -536,18 +536,23 @@ class FinancialGame {
         document.getElementById('save-score-btn').addEventListener('click', () => this.saveScore());
         document.getElementById('play-again-btn').addEventListener('click', () => this.restartGame());
 
-        // Close modals
+        // Close modals (hide and remove any 'open' class for consistent behavior)
         document.querySelectorAll('.close').forEach(close => {
             close.addEventListener('click', (e) => {
-                e.target.closest('.modal').style.display = 'none';
+                const modal = e.target.closest('.modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                    modal.classList.remove('open');
+                }
             });
         });
 
-        // Close modals on background click
+        // Close modals on background click (also remove 'open' class)
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
+                    modal.classList.remove('open');
                 }
             });
         });
@@ -657,7 +662,13 @@ class FinancialGame {
     }
 
     showTestimonials() {
-        document.getElementById('testimonials-modal').style.display = 'flex';
+        const modal = document.getElementById('testimonials-modal');
+        if (modal) {
+            // Use a class to control visibility so stylesheet can enforce default hidden
+            modal.classList.add('open');
+            // Keep inline style for compatibility; CSS .open rule (with !important) will take precedence
+            modal.style.display = 'flex';
+        }
     }
 
     showSettings() {
