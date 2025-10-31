@@ -243,7 +243,11 @@ const MARKET_EVENTS = [
 ];
 
 // Financial Literacy Simulation Game
-ensureModalsHiddenOnLoad() {
+// Ensure modals are hidden on initial load. Defined as a regular function so
+// it can run before the class is instantiated (avoids breaking the script
+// if method syntax was invalid). This hides the testimonials modal which
+// otherwise is visible by default in the HTML.
+function ensureModalsHiddenOnLoad() {
     const modalIds = [
         'about-modal',
         'settings-modal',
@@ -300,7 +304,8 @@ class FinancialGame {
         this.initAllocationChart();
         this.createParticles();
         this.fetchMarketData(); // Load real market data
-        this.ensureModalsHiddenOnLoad(); 
+    // Hide modals on load (use global function)
+    ensureModalsHiddenOnLoad();
 
     }
 
